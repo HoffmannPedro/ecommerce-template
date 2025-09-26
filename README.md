@@ -17,14 +17,19 @@ Template modular para ecommerce con React + Tailwind v4 (frontend), Spring Boot 
 - Relación: 1:N (una categoría, muchos productos).
 - JPA: Tablas creadas automáticamente (`spring.jpa.hibernate.ddl-auto=update`).
 
+## APIs REST
+- GET `/api/products`: Lista productos.
+- POST `/api/products`: Crea producto (JSON: `{"name": "string", "price": number, "category": {"id": number}}`).
+- GET `/api/categories`: Lista categorías.
+- POST `/api/categories`: Crea categoría (JSON: `{"name": "string"}`).
+- Prueba con Postman o `curl http://localhost:8080/api/...`.
+
 ## Troubleshooting
-- Frontend: Si Tailwind no aplica, verifica `index.css` en `main.jsx` y `@tailwindcss/postcss` en `postcss.config.js`.
-- Backend: Si falla, verifica Postgres (`psql -U postgres -d ecommerce_db`) y usa `./mvnw spring-boot:run -e -X`.
+- Frontend: Verifica `index.css` en `main.jsx` y `@tailwindcss/postcss`.
+- Backend: Verifica Postgres (`psql -U postgres -d ecommerce_db`), usa `./mvnw spring-boot:run -e -X`.
+- APIs: Si 404, asegura backend corriendo en 8080.
 
 ## Reutilización
-- Clona repo.
-- Ajusta DB en `application.properties`.
-- Personaliza Tailwind en `tailwind.config.js` (opcional).
-- Expande entidades en `com.example.demo.model`.
-
-Basado en arquitectura en capas: UI (React), lógica (Spring), datos (JPA/Postgres).
+- Clona repo, ajusta DB configs.
+- Expande APIs en `controller/`, lógica en `service/`.
+- Usa ramas (`git checkout -b feat/nueva-feature`).
