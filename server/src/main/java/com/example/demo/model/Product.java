@@ -17,6 +17,7 @@ public class Product {
     @Column(nullable = false)
     private BigDecimal price;
 
+    // Relación N:1 con Category
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
