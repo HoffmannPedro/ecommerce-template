@@ -4,7 +4,7 @@ Template modular para ecommerce con React + Tailwind v4 (frontend), Spring Boot 
 
 ## Template Base
 - Rama: template-base
-- Estado: Listado de productos (API REST, DB), carrito (agregar/remover/total, Context API).
+- Estado: Listado de productos (API REST, DB), carrito con agregar/remover/remover-uno/total (Context API).
 - Reutilización: Clona `template-base`. Ajusta DB en `application.properties`, copia `CartContext` para estado global.
 
 ## Prerrequisitos
