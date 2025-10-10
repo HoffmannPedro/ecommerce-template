@@ -5,6 +5,8 @@ export default function Cart() {
 
     const { cartItems, removeFromCart } = useCart();
 
+    const totalPrice = cartItems.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
+
     if (cartItems.length === 0) {
         return (
             <div className='mt-4 p-4 border rounded bg-gray-100'>
@@ -29,6 +31,7 @@ export default function Cart() {
                     </li>
                 ))}
             </ul>
+            <p className='mt-4 text-lg font-bold'>Total: {totalPrice.toFixed(2)}</p>
         </div>
     )
 }
