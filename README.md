@@ -2,11 +2,10 @@
 
 Template modular para ecommerce con React + Tailwind v4 (frontend), Spring Boot + JPA (backend), PostgreSQL (DB).
 
-  ## Template Base
+## Template Base
 - Rama: template-base
-- Uso: git clone <url> --branch template-base
-- Ajusta: application.properties (DB), agrega entidades.
-- Reutilización: Para nuevo proyecto, clona rama y expande (ej: add carrito).
+- Estado: Listado de productos (API REST, DB), carrito (agregar/remover/total, Context API).
+- Reutilización: Clona `template-base`. Ajusta DB en `application.properties`, copia `CartContext` para estado global.
 
 ## Prerrequisitos
 - Node.js 20+ (frontend)
