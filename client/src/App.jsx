@@ -9,8 +9,8 @@ export default function App() {
     <>
       <div className='bg-blue-500 text-white p-8 rounded-lg shadow-lg'>
         <h1>Ecommerce Template</h1>
-          <ProductList />
-          <Cart />
+        <ProductList />
+        <Cart />
       </div>
     </>
   )

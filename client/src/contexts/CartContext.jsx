@@ -5,6 +5,7 @@ const CartContext = createContext();
 export const CartProvider = ({ children }) => {
     const [cartItems, setCartItems] = useState([]);
 
+    // Agrega un producto al carrito
     const addToCart = (product) => {
         setCartItems(prevCart => {
             const existingItem = prevCart.find(item => item.product.id === product.id);
@@ -20,6 +21,7 @@ export const CartProvider = ({ children }) => {
         });
     };
 
+    // Remueve una unidad de un producto del carrito
     const removeOne = (productId) => {
         setCartItems(prevCart => {
             const existingItem = prevCart.find(item => item.product.id === productId);
@@ -38,6 +40,7 @@ export const CartProvider = ({ children }) => {
         })
     }
 
+    // Remueve todas las unidades de un producto del carrito
     const removeFromCart = (productId) => {
         setCartItems(prevCart => prevCart.filter(item => item.product.id !== productId));
     };
