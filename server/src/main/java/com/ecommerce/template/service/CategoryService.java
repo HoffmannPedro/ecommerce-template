@@ -1,9 +1,9 @@
-package com.example.demo.service;
+package com.ecommerce.template.service;
 
-import com.example.demo.dto.CategoryDTO;
-import com.example.demo.dto.ProductDTO;
-import com.example.demo.model.Category;
-import com.example.demo.repository.CategoryRepository;
+import com.ecommerce.template.dto.CategoryDTO;
+import com.ecommerce.template.dto.ProductDTO;
+import com.ecommerce.template.model.Category;
+import com.ecommerce.template.repository.CategoryRepository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

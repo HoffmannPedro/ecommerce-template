@@ -1,4 +1,4 @@
-package com.example.demo.dto;
+package com.ecommerce.template.dto;
 
 import java.math.BigDecimal;
 

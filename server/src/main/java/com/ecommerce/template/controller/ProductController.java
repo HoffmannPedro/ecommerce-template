@@ -1,8 +1,7 @@
-package com.example.demo.controller;
+package com.ecommerce.template.controller;
 
-import com.example.demo.dto.ProductDTO;
-import com.example.demo.model.Product;
-import com.example.demo.service.ProductService;
+import com.ecommerce.template.dto.ProductDTO;
+import com.ecommerce.template.service.ProductService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

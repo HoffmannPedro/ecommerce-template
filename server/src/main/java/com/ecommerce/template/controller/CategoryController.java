@@ -1,7 +1,7 @@
-package com.example.demo.controller;
+package com.ecommerce.template.controller;
 
-import com.example.demo.dto.CategoryDTO;
-import com.example.demo.service.CategoryService;
+import com.ecommerce.template.dto.CategoryDTO;
+import com.ecommerce.template.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
