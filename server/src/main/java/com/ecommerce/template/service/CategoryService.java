@@ -59,7 +59,7 @@ public class CategoryService {
         try {
             logger.info("Eliminando categoría con ID: {}", id);
             Category category = categoryRepository.findById(id)
-                    .orElseThrow(() -> new RuntimeException("Categoría no encontrada"));
+                    .orElseThrow(() -> new IllegalArgumentException("Categoría con id:" + id + " no encontrada" ));
             if (!category.getProducts().isEmpty()) {
                 logger.warn("Intento de eliminar categoría con productos {}", id);
                 throw new IllegalArgumentException("No se puede eliminar una categoría que tiene productos asociados");

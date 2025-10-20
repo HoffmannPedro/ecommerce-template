@@ -1,172 +1,21 @@
-2025-10-16T14:42:49.790-03:00  INFO 17880 --- [main] com.ecommerce.template.DemoApplication         : Starting DemoApplication using Java 21.0.8 with PID 17880 (C:\Users\hoffm\Documents\Importante\Progra\Giladas Mias\ecommerce-template\server\target\classes started by hoffm in C:\Users\hoffm\Documents\Importante\Progra\Giladas Mias\ecommerce-template\server)
-2025-10-16T14:42:49.793-03:00  INFO 17880 --- [main] com.ecommerce.template.DemoApplication         : No active profile set, falling back to 1 default profile: "default"
-2025-10-16T14:42:50.761-03:00  INFO 17880 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-10-16T14:42:50.845-03:00  INFO 17880 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 72 ms. Found 2 JPA repository interfaces.
-2025-10-16T14:42:51.617-03:00  INFO 17880 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2025-10-16T14:42:51.639-03:00  INFO 17880 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-10-16T14:42:51.639-03:00  INFO 17880 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
-2025-10-16T14:42:51.738-03:00  INFO 17880 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-10-16T14:42:51.739-03:00  INFO 17880 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1863 ms
-2025-10-16T14:42:51.963-03:00  INFO 17880 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-10-16T14:42:52.070-03:00  INFO 17880 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.29.Final
-2025-10-16T14:42:52.127-03:00  INFO 17880 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-10-16T14:42:52.588-03:00  INFO 17880 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-10-16T14:42:52.638-03:00  INFO 17880 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-10-16T14:42:53.239-03:00  INFO 17880 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@60c96eb4
-2025-10-16T14:42:53.242-03:00  INFO 17880 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-10-16T14:42:53.403-03:00  INFO 17880 --- [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 17.6
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2025-10-16T14:42:55.051-03:00  INFO 17880 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-10-16T14:42:55.383-03:00  INFO 17880 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-10-16T14:42:55.776-03:00  WARN 17880 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-16T14:42:56.268-03:00  INFO 17880 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
-2025-10-16T14:42:56.278-03:00  INFO 17880 --- [main] com.ecommerce.template.DemoApplication         : Started DemoApplication in 7.218 seconds (process running for 7.727)
-2025-10-16T14:43:18.486-03:00  INFO 17880 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-10-16T14:43:18.487-03:00  INFO 17880 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2025-10-16T14:43:18.488-03:00  INFO 17880 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2025-10-16T14:45:18.535-03:00  INFO 17880 --- [http-nio-8080-exec-5] c.example.demo.service.ProductService    : Creando producto: Silla Gamer
-2025-10-16T14:45:18.603-03:00  INFO 17880 --- [http-nio-8080-exec-5] c.example.demo.service.ProductService    : Producto creado con ID: 6
-2025-10-16T14:50:54.711-03:00  WARN 17880 --- [http-nio-8080-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'DELETE' is not supported]
-2025-10-16T14:51:25.203-03:00  WARN 17880 --- [http-nio-8080-exec-3] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'DELETE' is not supported]
-2025-10-16T15:37:00.508-03:00  INFO 17880 --- [http-nio-8080-exec-5] c.example.demo.service.ProductService    : Creando producto: Silla Ergonómica
-2025-10-16T15:37:00.548-03:00  INFO 17880 --- [http-nio-8080-exec-5] c.example.demo.service.ProductService    : Producto creado con ID: 9
-2025-10-16T16:00:23.253-03:00  INFO 17880 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
-2025-10-16T16:00:23.264-03:00  INFO 17880 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
-2025-10-16T16:00:23.271-03:00  INFO 17880 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-10-16T16:00:23.278-03:00  INFO 17880 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2025-10-16T16:00:23.291-03:00  INFO 17880 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2025-10-16T16:01:01.139-03:00  INFO 26280 --- [main] com.ecommerce.template.DemoApplication         : Starting DemoApplication using Java 21.0.8 with PID 26280 (C:\Users\hoffm\Documents\Importante\Progra\Giladas Mias\ecommerce-template\server\target\classes started by hoffm in C:\Users\hoffm\Documents\Importante\Progra\Giladas Mias\ecommerce-template\server)
-2025-10-16T16:01:01.142-03:00  INFO 26280 --- [main] com.ecommerce.template.DemoApplication         : No active profile set, falling back to 1 default profile: "default"
-2025-10-16T16:01:01.906-03:00  INFO 26280 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-10-16T16:01:01.985-03:00  INFO 26280 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 66 ms. Found 2 JPA repository interfaces.
-2025-10-16T16:01:02.607-03:00  INFO 26280 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2025-10-16T16:01:02.630-03:00  INFO 26280 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-10-16T16:01:02.631-03:00  INFO 26280 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
-2025-10-16T16:01:02.718-03:00  INFO 26280 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-10-16T16:01:02.719-03:00  INFO 26280 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1513 ms
-2025-10-16T16:01:02.923-03:00  INFO 26280 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-10-16T16:01:02.999-03:00  INFO 26280 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.29.Final
-2025-10-16T16:01:03.044-03:00  INFO 26280 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-10-16T16:01:03.497-03:00  INFO 26280 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-10-16T16:01:03.538-03:00  INFO 26280 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-10-16T16:01:03.755-03:00  INFO 26280 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@64b73e0a
-2025-10-16T16:01:03.758-03:00  INFO 26280 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-10-16T16:01:03.850-03:00  INFO 26280 --- [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 17.6
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2025-10-16T16:01:05.089-03:00  INFO 26280 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-10-16T16:01:05.324-03:00  INFO 26280 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-10-16T16:01:05.577-03:00  WARN 26280 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-16T16:01:05.996-03:00  INFO 26280 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
-2025-10-16T16:01:06.006-03:00  INFO 26280 --- [main] com.ecommerce.template.DemoApplication         : Started DemoApplication in 5.601 seconds (process running for 6.02)
-2025-10-16T16:01:35.396-03:00  INFO 26280 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-10-16T16:01:35.397-03:00  INFO 26280 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2025-10-16T16:01:35.400-03:00  INFO 26280 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
-2025-10-16T16:01:35.695-03:00  INFO 26280 --- [http-nio-8080-exec-2] c.example.demo.service.ProductService    : Obteniendo todos los productos, total: 5
-2025-10-16T16:02:09.030-03:00  INFO 26280 --- [http-nio-8080-exec-3] c.example.demo.service.ProductService    : Creando producto: Silla Ergonómica
-2025-10-16T16:02:09.090-03:00  INFO 26280 --- [http-nio-8080-exec-3] c.example.demo.service.ProductService    : Producto creado con ID: 10
-2025-10-16T16:02:28.671-03:00  INFO 26280 --- [http-nio-8080-exec-4] c.example.demo.service.ProductService    : Obteniendo todos los productos, total: 6
-2025-10-16T16:02:44.235-03:00  INFO 26280 --- [http-nio-8080-exec-5] c.example.demo.service.ProductService    : Eliminando productos con id 10
-2025-10-16T16:02:44.250-03:00  INFO 26280 --- [http-nio-8080-exec-5] c.example.demo.service.ProductService    : Producto eliminado con id 10
-2025-10-16T16:02:58.820-03:00  INFO 26280 --- [http-nio-8080-exec-6] c.example.demo.service.CategoryService   : Obteniendo todas las categorías
-2025-10-16T16:03:30.205-03:00  INFO 26280 --- [http-nio-8080-exec-7] c.example.demo.service.CategoryService   : Creando categoría: Juguetes
-2025-10-16T16:03:30.215-03:00  INFO 26280 --- [http-nio-8080-exec-7] c.example.demo.service.CategoryService   : Categoría creada con ID: 9
-2025-10-16T16:06:53.386-03:00  INFO 26280 --- [http-nio-8080-exec-10] c.example.demo.service.CategoryService   : Eliminando categoría con ID: 9
-2025-10-16T16:06:53.396-03:00  INFO 26280 --- [http-nio-8080-exec-10] c.example.demo.service.CategoryService   : Categoría eliminada con ID: 9
-2025-10-16T16:08:23.165-03:00  INFO 26280 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
-2025-10-16T16:08:23.169-03:00  INFO 26280 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
-2025-10-16T16:08:23.172-03:00  INFO 26280 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-10-16T16:08:23.175-03:00  INFO 26280 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2025-10-16T16:08:23.178-03:00  INFO 26280 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2025-10-16T16:08:41.148-03:00  INFO 24416 --- [main] com.ecommerce.template.DemoApplication         : Starting DemoApplication using Java 21.0.8 with PID 24416 (C:\Users\hoffm\Documents\Importante\Progra\Giladas Mias\ecommerce-template\server\target\classes started by hoffm in C:\Users\hoffm\Documents\Importante\Progra\Giladas Mias\ecommerce-template\server)
-2025-10-16T16:08:41.151-03:00  INFO 24416 --- [main] com.ecommerce.template.DemoApplication         : No active profile set, falling back to 1 default profile: "default"
-2025-10-16T16:08:41.917-03:00  INFO 24416 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-10-16T16:08:41.999-03:00  INFO 24416 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 70 ms. Found 2 JPA repository interfaces.
-2025-10-16T16:08:42.624-03:00  INFO 24416 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2025-10-16T16:08:42.645-03:00  INFO 24416 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-10-16T16:08:42.645-03:00  INFO 24416 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
-2025-10-16T16:08:42.726-03:00  INFO 24416 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-10-16T16:08:42.727-03:00  INFO 24416 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1521 ms
-2025-10-16T16:08:42.931-03:00  INFO 24416 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-10-16T16:08:43.001-03:00  INFO 24416 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.29.Final
-2025-10-16T16:08:43.044-03:00  INFO 24416 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-10-16T16:08:43.414-03:00  INFO 24416 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-10-16T16:08:43.455-03:00  INFO 24416 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-10-16T16:08:43.661-03:00  INFO 24416 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@64b73e0a
-2025-10-16T16:08:43.664-03:00  INFO 24416 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-10-16T16:08:43.752-03:00  INFO 24416 --- [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 17.6
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2025-10-16T16:08:45.065-03:00  INFO 24416 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-10-16T16:08:45.266-03:00  INFO 24416 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-10-16T16:08:45.528-03:00  WARN 24416 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-16T16:08:45.996-03:00  INFO 24416 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
-2025-10-16T16:08:46.006-03:00  INFO 24416 --- [main] com.ecommerce.template.DemoApplication         : Started DemoApplication in 5.54 seconds (process running for 5.985)
-2025-10-16T16:08:52.644-03:00  INFO 24416 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-10-16T16:08:52.645-03:00  INFO 24416 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2025-10-16T16:08:52.646-03:00  INFO 24416 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2025-10-16T16:08:52.739-03:00  INFO 24416 --- [http-nio-8080-exec-2] c.example.demo.service.CategoryService   : Obteniendo todas las categorías
-2025-10-16T16:09:11.699-03:00  INFO 24416 --- [http-nio-8080-exec-3] c.example.demo.service.CategoryService   : Creando categoría: Juguetes
-2025-10-16T16:09:11.756-03:00  INFO 24416 --- [http-nio-8080-exec-3] c.example.demo.service.CategoryService   : Categoría Juguetes creada con ID: 10
-2025-10-16T16:09:29.678-03:00  INFO 24416 --- [http-nio-8080-exec-4] c.example.demo.service.CategoryService   : Eliminando categoría 10 con ID: {}
-2025-10-16T16:09:29.706-03:00  INFO 24416 --- [http-nio-8080-exec-4] c.example.demo.service.CategoryService   : Categoría Juguetes eliminada con ID: 10
-2025-10-16T17:48:57.708-03:00  INFO 24416 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
-2025-10-16T17:48:57.900-03:00  INFO 24416 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
-2025-10-16T17:48:58.156-03:00  INFO 24416 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-10-16T17:48:58.481-03:00  INFO 24416 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2025-10-16T17:48:58.600-03:00  INFO 24416 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2025-10-16T18:08:39.284-03:00  INFO 20204 --- [main] com.ecommerce.template.DemoApplication   : Starting DemoApplication using Java 21.0.8 with PID 20204 (C:\Users\hoffm\Documents\Importante\Progra\Giladas Mias\ecommerce-template\server\target\classes started by hoffm in C:\Users\hoffm\Documents\Importante\Progra\Giladas Mias\ecommerce-template\server)
-2025-10-16T18:08:39.286-03:00  INFO 20204 --- [main] com.ecommerce.template.DemoApplication   : No active profile set, falling back to 1 default profile: "default"
-2025-10-16T18:08:40.017-03:00  INFO 20204 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-10-16T18:08:40.091-03:00  INFO 20204 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 60 ms. Found 2 JPA repository interfaces.
-2025-10-16T18:08:40.685-03:00  INFO 20204 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2025-10-16T18:08:40.703-03:00  INFO 20204 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-10-16T18:08:40.704-03:00  INFO 20204 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
-2025-10-16T18:08:40.781-03:00  INFO 20204 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-10-16T18:08:40.782-03:00  INFO 20204 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1439 ms
-2025-10-16T18:08:40.983-03:00  INFO 20204 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-10-16T18:08:41.051-03:00  INFO 20204 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.29.Final
-2025-10-16T18:08:41.093-03:00  INFO 20204 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-10-16T18:08:41.446-03:00  INFO 20204 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-10-16T18:08:41.488-03:00  INFO 20204 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-10-16T18:08:41.749-03:00  INFO 20204 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@64b73e0a
-2025-10-16T18:08:41.751-03:00  INFO 20204 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-10-16T18:08:41.839-03:00  INFO 20204 --- [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 17.6
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2025-10-16T18:08:42.959-03:00  INFO 20204 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-10-16T18:08:43.480-03:00  INFO 20204 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-10-16T18:08:43.735-03:00  WARN 20204 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-10-16T18:08:44.149-03:00  INFO 20204 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
-2025-10-16T18:08:44.158-03:00  INFO 20204 --- [main] com.ecommerce.template.DemoApplication   : Started DemoApplication in 5.45 seconds (process running for 5.888)
-2025-10-16T18:08:59.138-03:00  INFO 20204 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-10-16T18:08:59.138-03:00  INFO 20204 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2025-10-16T18:08:59.140-03:00  INFO 20204 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2025-10-16T18:08:59.609-03:00  INFO 20204 --- [http-nio-8080-exec-1] c.e.template.service.ProductService      : Obteniendo todos los productos, total: 5
-2025-10-16T18:08:59.768-03:00  INFO 20204 --- [http-nio-8080-exec-2] c.e.template.service.ProductService      : Obteniendo todos los productos, total: 5
-2025-10-16T18:09:59.979-03:00  INFO 20204 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
-2025-10-16T18:09:59.983-03:00  INFO 20204 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
-2025-10-16T18:09:59.988-03:00  INFO 20204 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-10-16T18:09:59.992-03:00  INFO 20204 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2025-10-16T18:09:59.996-03:00  INFO 20204 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-10-20T14:17:48.918-03:00  INFO 21792 --- [http-nio-8080-exec-6] c.e.template.service.CartService         : Agregando producto con ID: 4 y cantidad: 1 al carrito del usuario con userId: 1
+2025-10-20T14:17:49.005-03:00  INFO 21792 --- [http-nio-8080-exec-6] c.e.template.service.CartService         : Agregado nuevo producto con ID: 4 al carrito: 1
+2025-10-20T14:17:51.946-03:00  INFO 21792 --- [http-nio-8080-exec-7] c.e.template.service.CartService         : Agregando producto con ID: 5 y cantidad: 1 al carrito del usuario con userId: 1
+2025-10-20T14:17:51.956-03:00  INFO 21792 --- [http-nio-8080-exec-7] c.e.template.service.CartService         : Agregado nuevo producto con ID: 5 al carrito: 1
+2025-10-20T14:17:52.476-03:00  INFO 21792 --- [http-nio-8080-exec-8] c.e.template.service.CartService         : Agregando producto con ID: 3 y cantidad: 1 al carrito del usuario con userId: 1
+2025-10-20T14:17:52.486-03:00  INFO 21792 --- [http-nio-8080-exec-8] c.e.template.service.CartService         : Agregado nuevo producto con ID: 3 al carrito: 1
+2025-10-20T14:18:03.314-03:00  INFO 21792 --- [http-nio-8080-exec-9] c.e.template.service.CartService         : Agregando producto con ID: 5 y cantidad: 1 al carrito del usuario con userId: 1
+2025-10-20T14:18:03.337-03:00  INFO 21792 --- [http-nio-8080-exec-9] c.e.template.service.CartService         : Actualizada la cantidad del producto con ID: 5 en carrito: 1
+2025-10-20T14:18:03.654-03:00  INFO 21792 --- [http-nio-8080-exec-10] c.e.template.service.CartService         : Agregando producto con ID: 5 y cantidad: 1 al carrito del usuario con userId: 1
+2025-10-20T14:18:03.664-03:00  INFO 21792 --- [http-nio-8080-exec-10] c.e.template.service.CartService         : Actualizada la cantidad del producto con ID: 5 en carrito: 1
+2025-10-20T14:18:27.882-03:00  INFO 21792 --- [http-nio-8080-exec-2] c.e.template.service.CartService         : Removiendo una unidad del producto con ID: 5 del carrito del usuario con userId: 1
+2025-10-20T14:18:27.889-03:00  INFO 21792 --- [http-nio-8080-exec-2] c.e.template.service.CartService         : Disminuida la cantidad del producto con ID: 5 en carrito: 1
+2025-10-20T14:18:41.179-03:00  INFO 21792 --- [http-nio-8080-exec-5] c.e.template.service.CartService         : Agregando producto con ID: 5 y cantidad: 1 al carrito del usuario con userId: 1
+2025-10-20T14:18:41.187-03:00  INFO 21792 --- [http-nio-8080-exec-5] c.e.template.service.CartService         : Actualizada la cantidad del producto con ID: 5 en carrito: 1
+2025-10-20T14:18:49.042-03:00  INFO 21792 --- [http-nio-8080-exec-7] c.e.template.service.CartService         : Removiendo el producto con ID: 5 del carrito del usuario con userId: 1
+2025-10-20T14:18:49.056-03:00  INFO 21792 --- [http-nio-8080-exec-7] c.e.template.service.CartService         : Producto con ID: 5 eliminado del carrito con ID: 1
+2025-10-20T14:44:38.911-03:00  INFO 21792 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-10-20T14:44:38.915-03:00  INFO 21792 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-10-20T14:44:38.919-03:00  INFO 21792 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-20T14:44:38.922-03:00  INFO 21792 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-10-20T14:44:38.925-03:00  INFO 21792 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
