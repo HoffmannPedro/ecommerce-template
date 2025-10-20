@@ -9,13 +9,28 @@ export const CartProvider = ({ children }) => {
 
     const userId = 1;
 
+    // Función para fetch con reintentos}
+    const fetchWithRetry = async (url, options = {}, retries = 3, delay = 1000) => {
+        for (let i  = 0; i < retries; i++) {
+            try {
+                const response = await fetch(url, options);
+                if (!response.ok) throw new Error(`HTTP error : ${response.status}`);
+                return await response.json();
+            } catch (err) {
+                if (i < retries - 1) {
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    continue;
+                }
+                throw err;
+                
+            }
+            
+        }
+    };
+
     // Cargar carrito al iniciar
     useEffect(() => {
-        fetch(`http://localhost:8080/api/cart/${userId}`)
-            .then(response => {
-                if (!response.ok) throw new Error('Error al cargar el carrito');
-                return response.json();
-            })
+        fetchWithRetry(`http://localhost:8080/api/cart/${userId}`)
             .then(data => {
                 setCartItems(data.items.map(item => ({
                     product: {
@@ -28,7 +43,7 @@ export const CartProvider = ({ children }) => {
                 setLoading(false);
             })
             .catch(err => {
-                setError(err.message);
+                setError(`Fallo al cargar el carrito: ${err.message}`);
                 setLoading(false);
             });
     }, []);
@@ -36,14 +51,12 @@ export const CartProvider = ({ children }) => {
     // Agrega un producto al carrito
     const addToCart = async (product) => {
         try {
-            const response = await fetch(`http://localhost:8080/api/cart/${userId}/items`, {
+            const data = await fetchWithRetry(`http://localhost:8080/api/cart/${userId}/items`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({ productId: product.id, quantity: 1 })
             });
-            if (!response.ok) throw new Error('Error al agregar al carrito');
-            const updatedCart = await response.json();
-            setCartItems(updatedCart.items.map(item => ({
+            setCartItems(data.items.map(item => ({
                 product: {
                     id: item.productId,
                     name: item.productName,
@@ -51,20 +64,19 @@ export const CartProvider = ({ children }) => {
                 },
                 quantity: item.quantity
             })));
+            setError(null);
         } catch (err) {
-            setError(err.message);
+            setError(`Fallo al cargar el carrito: ${err.message}`);
         }
     };
 
     // Remueve una unidad de un producto del carrito
     const removeOne = async (productId) => {
         try {
-            const response = await fetch(`http://localhost:8080/api/cart/${userId}/items/${productId}/one`, {
+            const data = await fetchWithRetry(`http://localhost:8080/api/cart/${userId}/items/${productId}/one`, {
                 method: 'DELETE',
             });
-            if (!response.ok) throw new Error('Error al eliminar una unidad');
-            const updatedCart = await response.json();
-            setCartItems(updatedCart.items.map(item => ({
+            setCartItems(data.items.map(item => ({
                 product: {
                     id: item.productId,
                     name: item.productName,
@@ -72,6 +84,7 @@ export const CartProvider = ({ children }) => {
                 },
                 quantity: item.quantity
             })));
+            setError(null);
         } catch (err) {
             setError(err.message);
         }
@@ -80,12 +93,10 @@ export const CartProvider = ({ children }) => {
     // Remueve todas las unidades de un producto del carrito
     const removeFromCart = async (productId) => {
         try {
-            const response = await fetch(`http://localhost:8080/api/cart/${userId}/items/${productId}`, {
+            const data = await fetchWithRetry(`http://localhost:8080/api/cart/${userId}/items/${productId}`, {
                 method: 'DELETE'
             });
-            if (!response.ok) throw new Error('Error al eliminar del carrito');
-            const updatedCart = await response.json();
-            setCartItems(updatedCart.items.map(item => ({
+            setCartItems(data.items.map(item => ({
                 product: {
                     id: item.productId,
                     name: item.productName,
@@ -93,6 +104,7 @@ export const CartProvider = ({ children }) => {
                 },
                 quantity: item.quantity
             })));
+            setError(null);
         } catch (err) {
             setError(err.message);
         }
