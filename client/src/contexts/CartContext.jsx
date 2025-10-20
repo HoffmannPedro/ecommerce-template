@@ -1,52 +1,105 @@
-import {createContext, useContext, useState} from 'react';
+import {createContext, useContext, useState, useEffect } from 'react';
 
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
     const [cartItems, setCartItems] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    const userId = 1;
+
+    // Cargar carrito al iniciar
+    useEffect(() => {
+        fetch(`http://localhost:8080/api/cart/${userId}`)
+            .then(response => {
+                if (!response.ok) throw new Error('Error al cargar el carrito');
+                return response.json();
+            })
+            .then(data => {
+                setCartItems(data.items.map(item => ({
+                    product: {
+                        id: item.productId,
+                        name: item.productName,
+                        price: item.price
+                    },
+                    quantity: item.quantity
+                })));
+                setLoading(false);
+            })
+            .catch(err => {
+                setError(err.message);
+                setLoading(false);
+            });
+    }, []);
 
     // Agrega un producto al carrito
-    const addToCart = (product) => {
-        setCartItems(prevCart => {
-            const existingItem = prevCart.find(item => item.product.id === product.id);
-            
-            if (existingItem) {
-                return prevCart.map(item => 
-                    item.product.id === product.id
-                    ? { ...item, quantity: item.quantity + 1}
-                    : item
-                );
-            }
-            return [...prevCart, {product, quantity: 1}];
-        });
+    const addToCart = async (product) => {
+        try {
+            const response = await fetch(`http://localhost:8080/api/cart/${userId}/items`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ productId: product.id, quantity: 1 })
+            });
+            if (!response.ok) throw new Error('Error al agregar al carrito');
+            const updatedCart = await response.json();
+            setCartItems(updatedCart.items.map(item => ({
+                product: {
+                    id: item.productId,
+                    name: item.productName,
+                    price: item.price
+                },
+                quantity: item.quantity
+            })));
+        } catch (err) {
+            setError(err.message);
+        }
     };
 
     // Remueve una unidad de un producto del carrito
-    const removeOne = (productId) => {
-        setCartItems(prevCart => {
-            const existingItem = prevCart.find(item => item.product.id === productId);
-
-            if (existingItem && existingItem.quantity > 1) {
-                return prevCart.map(item => 
-                    item.product.id === productId 
-                    ? {...item, quantity: item.quantity - 1}
-                    : item
-                );
-            }
-            else {
-                console.log("Removing item completely");
-                return prevCart.filter(item => item.product.id !== productId);
-            }
-        })
+    const removeOne = async (productId) => {
+        try {
+            const response = await fetch(`http://localhost:8080/api/cart/${userId}/items/${productId}/one`, {
+                method: 'DELETE',
+            });
+            if (!response.ok) throw new Error('Error al eliminar una unidad');
+            const updatedCart = await response.json();
+            setCartItems(updatedCart.items.map(item => ({
+                product: {
+                    id: item.productId,
+                    name: item.productName,
+                    price: item.price
+                },
+                quantity: item.quantity
+            })));
+        } catch (err) {
+            setError(err.message);
+        }
     }
 
     // Remueve todas las unidades de un producto del carrito
-    const removeFromCart = (productId) => {
-        setCartItems(prevCart => prevCart.filter(item => item.product.id !== productId));
+    const removeFromCart = async (productId) => {
+        try {
+            const response = await fetch(`http://localhost:8080/api/cart/${userId}/items/${productId}`, {
+                method: 'DELETE'
+            });
+            if (!response.ok) throw new Error('Error al eliminar del carrito');
+            const updatedCart = await response.json();
+            setCartItems(updatedCart.items.map(item => ({
+                product: {
+                    id: item.productId,
+                    name: item.productName,
+                    price: item.price
+                },
+                quantity: item.quantity
+            })));
+        } catch (err) {
+            setError(err.message);
+        }
     };
 
     return (
-        <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, removeOne}}>
+        <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, removeOne, loading, error }}>
             {children}
         </CartContext.Provider>
     );

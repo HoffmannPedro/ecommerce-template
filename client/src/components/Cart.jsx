@@ -1,12 +1,15 @@
 import React from 'react';
 import { useCart } from '../contexts/CartContext';
 
-import { XCircleIcon } from '@heroicons/react/24/solid';
+import { ChevronUpIcon, ChevronDownIcon } from '@heroicons/react/24/solid';
 
 function Cart() {
-    const { cartItems, removeFromCart, removeOne } = useCart();
+    const { cartItems, removeFromCart, removeOne, addToCart, loading, error } = useCart();
 
     const totalPrice = cartItems.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
+
+    if (loading) return <p className="mt-8 text-center">Cargando carrito...</p>
+    if (error) return <p className="mt-8 text-center text-red-500">Error: {error}</p>
 
     if (cartItems.length === 0) {
         return (
@@ -39,10 +42,15 @@ function Cart() {
                                 <td className="p-3 text-center">{item.quantity}</td>
                                 <td className="p-3">${(item.product.price * item.quantity).toFixed(2)}</td>
                                 <td className="p-3 flex space-x-2">
-                                    <XCircleIcon 
-                                        className='bg-yellow-500 text-white px-3 py-1 rounded text-sm hover:bg-yellow-600 cursor-pointer' 
-                                        onClick={() => removeOne(item.product.id)} 
+                                    <ChevronDownIcon 
+                                        className='bg-yellow-500 text-black px-3 py-1 rounded text-sm hover:bg-yellow-600 cursor-pointer'
+                                        onClick={() => removeOne(item.product.id)}
                                     />
+                                    <ChevronUpIcon
+                                        className='bg-yellow-500 text-black px-3 py-1 rounded text-sm hover:bg-yellow-600 cursor-pointer'
+                                        onClick={() => addToCart(item.product)}
+                                    />
+                                    
                                     <button
                                         className="bg-red-500 text-white px-3 py-1 rounded text-sm hover:bg-red-600"
                                         onClick={() => removeFromCart(item.product.id)}
