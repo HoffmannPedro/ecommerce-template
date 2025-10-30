@@ -5,6 +5,7 @@ import com.ecommerce.template.dto.CartItemDTO;
 import com.ecommerce.template.model.Cart;
 import com.ecommerce.template.model.CartItem;
 import com.ecommerce.template.model.Product;
+import com.ecommerce.template.model.User;
 import com.ecommerce.template.repository.CartRepository;
 import com.ecommerce.template.repository.CartItemRepository;
 import com.ecommerce.template.repository.ProductRepository;
@@ -12,6 +13,7 @@ import com.ecommerce.template.repository.ProductRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,18 +33,23 @@ public class CartService {
     @Autowired
     private ProductRepository productRepository;
 
-    public CartDTO getCartByUserId(Long userId) {
+    private User getCurrentUser() {
+        return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    }
+
+    public CartDTO getCart() {
         try {
-            logger.info("Obteniendo carrito para el usuario con ID: {}", userId);
-            Cart cart = cartRepository.findByUserId(userId)
+            User user = getCurrentUser();
+            logger.info("Obteniendo carrito para el usuario: {}", user.getUsername());
+            Cart cart = cartRepository.findByUser(user)
                 .orElseGet(() -> {
-                    logger.error("Carrito no encontrado, creando uno nuevo para userId: {}", userId);
-                    Cart newCart = new Cart(userId);
+                    logger.error("Carrito no encontrado, creando uno nuevo para el usuario: {}", user.getUsername());
+                    Cart newCart = new Cart(user);
                     return cartRepository.save(newCart);
                 });
             return new CartDTO(
                 cart.getId(),
-                cart.getUserId(),
+                cart.getUser().getId(),
                 cart.getItems().stream().map(item -> new CartItemDTO (
                         item.getId(),
                         item.getProduct().getId(),
@@ -52,22 +59,23 @@ public class CartService {
                 )).collect(Collectors.toList())
             ); 
         } catch (Exception e) {
-            logger.error("Error al obtener el carrito para userId {}: {}", userId, e.getMessage());
+            logger.error("Error al obtener el carrito para el usuario: {}", e.getMessage());
             throw new RuntimeException("Error al obtener el carrito: " + e.getMessage());
         }               
     }
 
-    public CartDTO addItem(Long userId, Long productId, Integer quantity) {
+    public CartDTO addItem(Long productId, Integer quantity) {
         try {
-            logger.info("Agregando producto con ID: {} y cantidad: {} al carrito del usuario con userId: {}", productId, quantity, userId);
-            Cart cart = cartRepository.findByUserId(userId)
+            User user = getCurrentUser();
+            logger.info("Agregando producto con ID: {} y cantidad: {} al carrito del usuario: {}", productId, quantity, user.getUsername());
+            Cart cart = cartRepository.findByUser(user)
                 .orElseGet(() -> {
-                    logger.info("Carrito no encontrado, creando uno nuevo para userId: {}", userId);
-                    return cartRepository.save(new Cart(userId));
+                    logger.info("Carrito no encontrado, creando uno nuevo para el usuario: {}", user.getUsername());
+                    return cartRepository.save(new Cart(user));
                 }); 
 
             Product product = productRepository.findById(productId)
-                .orElseThrow(() -> new IllegalArgumentException("Producto no encontrado con ID: " + productId));
+                .orElseThrow(() -> new IllegalArgumentException("Producto con ID: " + productId + " no encontrado"));
             
             CartItem existingItem = cart.getItems().stream()
                 .filter(item -> item.getProduct().getId().equals(productId))
@@ -88,7 +96,7 @@ public class CartService {
             cart = cartRepository.save(cart); // Persistir los cambios en el carrito
             return new CartDTO(
                 cart.getId(),
-                cart.getUserId(),
+                cart.getUser().getId(),
                 cart.getItems().stream().map(item -> new CartItemDTO (
                         item.getId(),
                         item.getProduct().getId(),
@@ -98,16 +106,17 @@ public class CartService {
                 )).collect(Collectors.toList())
             );
         } catch (Exception e) {
-            logger.error("Error al agregar el producto con ID: {} al carrito del usuario con userId {}: {}", productId, userId, e.getMessage());
+            logger.error("Error al agregar el producto con ID: {} en el carrito:", productId, e.getMessage());
             throw new RuntimeException("Error al agregar el producto al carrito: " + e.getMessage());
         }
     }
 
-    public CartDTO removeOne(Long userId, Long productId) {
+    public CartDTO removeOne(Long productId) {
         try {
-            logger.info("Removiendo una unidad del producto con ID: {} del carrito del usuario con userId: {}", productId, userId);
-            Cart cart = cartRepository.findByUserId(userId)
-                .orElseThrow(() -> new IllegalArgumentException("Carrito no encontrado para userId: " + userId));
+            User user = getCurrentUser();
+            logger.info("Removiendo una unidad del producto con ID: {} del carrito del usuario: {}", productId, user.getUsername());
+            Cart cart = cartRepository.findByUser(user)
+                .orElseThrow(() -> new IllegalArgumentException("Carrito no encontrado para usuario: " + user.getUsername()));
 
             CartItem item = cart.getItems().stream()
                 .filter(i -> i.getProduct().getId().equals(productId))
@@ -127,7 +136,7 @@ public class CartService {
             cartRepository.save(cart); 
             return new CartDTO(
                 cart.getId(),
-                cart.getUserId(),
+                cart.getUser().getId(),
                 cart.getItems().stream().map(i -> new CartItemDTO (
                         i.getId(),
                         i.getProduct().getId(),
@@ -137,16 +146,17 @@ public class CartService {
                 )).collect(Collectors.toList())
             );
         } catch (Exception e) {
-            logger.error("Error al remover una unidad del producto con ID: {} del carrito del usuario con userId {}: {}", productId, userId, e.getMessage());
-            throw new RuntimeException("Error al eliminar el producto del carrito: " + e.getMessage()); 
+            logger.error("Error al remover una unidad del producto con ID: {} en el carrito: {}", productId, e.getMessage());
+            throw new RuntimeException("Error al eliminar una unidad del producto en el carrito: " + e.getMessage()); 
         }
     }
 
-    public CartDTO removeItem(Long userId, Long productId) {
+    public CartDTO removeItem(Long productId) {
         try {
-            logger.info("Removiendo el producto con ID: {} del carrito del usuario con userId: {}", productId, userId);
-            Cart cart = cartRepository.findByUserId(userId)
-                .orElseThrow(() -> new IllegalArgumentException("Carrito no encontrado para userId: " + userId));
+            User user = getCurrentUser();
+            logger.info("Removiendo el producto con ID: {} del carrito del usuario con userId: {}", productId, user.getUsername());
+            Cart cart = cartRepository.findByUser(user)
+                .orElseThrow(() -> new IllegalArgumentException("Carrito no encontrado para usuario: " + user.getUsername()));
             
             CartItem item = cart.getItems().stream()
                 .filter(i -> i.getProduct().getId().equals(productId))
@@ -160,7 +170,7 @@ public class CartService {
             cartRepository.save(cart);
             return new CartDTO(
                 cart.getId(),
-                cart.getUserId(),
+                cart.getUser().getId(),
                 cart.getItems().stream().map(i -> new CartItemDTO (
                         i.getId(),
                         i.getProduct().getId(),
@@ -170,9 +180,35 @@ public class CartService {
                 )).collect(Collectors.toList())
             );
         } catch (Exception e) {
-            logger.error("Error al eliminar el producto con ID: {} del carrito del usuario con userId {}: {}", productId, userId, e.getMessage());
+            logger.error("Error al eliminar el producto con ID: {} del carrito: {}", productId, e.getMessage());
             throw new RuntimeException("Error al eliminar el producto del carrito: " + e.getMessage());
         }
     }
+
+    // Limpiar carrito.
+    public CartDTO clearCart() {
+    try {
+        User user = getCurrentUser();
+        logger.info("Limpiando carrito del usuario: {}", user.getUsername());
+
+        Cart cart = cartRepository.findByUser(user)
+            .orElseThrow(() -> new IllegalArgumentException("Carrito no encontrado para usuario: " + user.getUsername()));
+
+        // Borra todos los items (gracias a orphanRemoval = true)
+        cart.getItems().clear();
+        cartRepository.save(cart);
+
+        logger.info("Carrito limpiado exitosamente para usuario: {}", user.getUsername());
+
+        return new CartDTO(
+            cart.getId(),
+            cart.getUser().getId(),
+            List.of() // lista vacía
+        );
+    } catch (Exception e) {
+        logger.error("Error al limpiar el carrito: {}", e.getMessage());
+        throw new RuntimeException("Error al limpiar el carrito: " + e.getMessage());
+    }
+}
 
 }

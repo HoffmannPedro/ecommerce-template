@@ -1,4 +1,5 @@
-import {createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
+import api from '../services/api';
 
 const CartContext = createContext();
 
@@ -7,111 +8,98 @@ export const CartProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const userId = 1;
-
-    // Función para fetch con reintentos}
-    const fetchWithRetry = async (url, options = {}, retries = 3, delay = 1000) => {
-        for (let i  = 0; i < retries; i++) {
-            try {
-                const response = await fetch(url, options);
-                if (!response.ok) throw new Error(`HTTP error : ${response.status}`);
-                return await response.json();
-            } catch (err) {
-                if (i < retries - 1) {
-                    await new Promise(resolve => setTimeout(resolve, delay));
-                    continue;
-                }
-                throw err;
-                
-            }
-            
-        }
-    };
-
-    // Cargar carrito al iniciar
+    // CARGAR CARRITO AL INICIAR
     useEffect(() => {
-        fetchWithRetry(`http://localhost:8080/api/cart/${userId}`)
-            .then(data => {
-                setCartItems(data.items.map(item => ({
+        const loadCart = async () => {
+            try {
+                const data = await api.getCart();
+                setCartItems(
+                    data.items.map(item => ({
+                        product: {
+                            id: item.productId,
+                            name: item.productName,
+                            price: item.price
+                        },
+                        quantity: item.quantity
+                    }))
+                );
+                setLoading(false);
+            } catch (err) {
+                setError('No se pudo cargar el carrito');
+                setLoading(false);
+            }
+        };
+        loadCart();
+    }, []);
+
+    // AGREGAR AL CARRITO
+    const addToCart = async (product) => {
+        try {
+            const data = await api.addItem(product.id, 1);
+            setCartItems(
+                data.items.map(item => ({
                     product: {
                         id: item.productId,
                         name: item.productName,
                         price: item.price
                     },
                     quantity: item.quantity
-                })));
-                setLoading(false);
-            })
-            .catch(err => {
-                setError(`Fallo al cargar el carrito: ${err.message}`);
-                setLoading(false);
-            });
-    }, []);
-
-    // Agrega un producto al carrito
-    const addToCart = async (product) => {
-        try {
-            const data = await fetchWithRetry(`http://localhost:8080/api/cart/${userId}/items`, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ productId: product.id, quantity: 1 })
-            });
-            setCartItems(data.items.map(item => ({
-                product: {
-                    id: item.productId,
-                    name: item.productName,
-                    price: item.price
-                },
-                quantity: item.quantity
-            })));
-            setError(null);
+                }))
+            );
         } catch (err) {
-            setError(`Fallo al cargar el carrito: ${err.message}`);
+            setError('Error al agregar al carrito');
         }
     };
 
-    // Remueve una unidad de un producto del carrito
+    // QUITAR UNA UNIDAD
     const removeOne = async (productId) => {
         try {
-            const data = await fetchWithRetry(`http://localhost:8080/api/cart/${userId}/items/${productId}/one`, {
-                method: 'DELETE',
-            });
-            setCartItems(data.items.map(item => ({
-                product: {
-                    id: item.productId,
-                    name: item.productName,
-                    price: item.price
-                },
-                quantity: item.quantity
-            })));
-            setError(null);
+            const data = await api.removeOne(productId);
+            setCartItems(
+                data.items.map(item => ({
+                    product: {
+                        id: item.productId,
+                        name: item.productName,
+                        price: item.price
+                    },
+                    quantity: item.quantity
+                }))
+            );
         } catch (err) {
-            setError(err.message);
+            setError('Error al quitar unidad');
         }
-    }
+    };
 
-    // Remueve todas las unidades de un producto del carrito
+    // QUITAR TODO
     const removeFromCart = async (productId) => {
         try {
-            const data = await fetchWithRetry(`http://localhost:8080/api/cart/${userId}/items/${productId}`, {
-                method: 'DELETE'
-            });
-            setCartItems(data.items.map(item => ({
-                product: {
-                    id: item.productId,
-                    name: item.productName,
-                    price: item.price
-                },
-                quantity: item.quantity
-            })));
-            setError(null);
+            const data = await api.removeItem(productId);
+            setCartItems(
+                data.items.map(item => ({
+                    product: {
+                        id: item.productId,
+                        name: item.productName,
+                        price: item.price
+                    },
+                    quantity: item.quantity
+                }))
+            );
         } catch (err) {
-            setError(err.message);
+            setError('Error al eliminar del carrito');
         }
     };
 
     return (
-        <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, removeOne, loading, error }}>
+        <CartContext.Provider
+            value={{
+                cartItems,
+                addToCart,
+                removeOne,
+                removeFromCart,
+                loading,
+                error
+            }}
+        >
             {children}
         </CartContext.Provider>
     );

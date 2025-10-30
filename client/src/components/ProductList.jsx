@@ -1,17 +1,16 @@
-import { useEffect, useState } from 'react';
-import {useCart} from '../contexts/CartContext.jsx';
+import { useState, useEffect } from 'react';
+import { useCart } from '../contexts/CartContext';
 
-export default function ProductList() {
+function ProductList() {
+    const { addToCart } = useCart();
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    
-    const {addToCart} = useCart();
 
     useEffect(() => {
         fetch('http://localhost:8080/api/products')
             .then(response => {
-                if (!response.ok) throw new Error('Error fetching products');
+                if (!response.ok) throw new Error('Error al cargar productos');
                 return response.json();
             })
             .then(data => {
@@ -25,20 +24,16 @@ export default function ProductList() {
     }, []);
 
     if (loading) {
-        return (
-            <div className="mt-8 p-6 border rounded-lg bg-gray-50 max-w-2xl mx-auto text-center">
-                <div className='animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500 mx-auto'></div>
-                <div className="mt-4 text-gray-600">Cargando productos...</div>;
-            </div>
-        )
+        return <div className="text-center mt-8">Cargando productos...</div>;
     }
+
     if (error) {
         return (
-            <div className="mt-8 p-6 border rounded-lg bg-red-50 max-w-2xl mx-auto text-center">
-                <div className="text-red-600 font-semibold">Error: {error}</div>;
-                <button 
-                    className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-                    onClick ={() => window.location.reload()}
+            <div className="text-center mt-8 text-red-600">
+                Error: {error}
+                <button
+                    onClick={() => window.location.reload()}
+                    className="ml-2 bg-blue-500 text-white px-4 py-2 rounded"
                 >
                     Reintentar
                 </button>
@@ -46,30 +41,29 @@ export default function ProductList() {
         );
     }
 
-
     return (
-    <div className="p-6 mt-8 max-w-6xl mx-auto">
-        <h2 className="text-2xl font-bold mb-4 text-center">Productos</h2>
-        <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {products.map(product => (
-                <li key={product.id} className="border rounded-lg shadow p-4 bg-white hover:shadow-xl transition-shadow">
-                    <img 
-                        src={product.imageUrl || 'https://via.placeholder.com/150'} 
-                        alt={product.name} 
-                        className='w-full h-48 object-cover rounded mb-4'
-                    />
-                    <h3 className="text-lg text-black font-semibold">{product.name}</h3>
-                    <p className="text-gray-600">${product.price}</p>
-                    <p className="text-gray-500">Categoría: {product.categoryName}</p>
-                    <button 
-                        className="mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors" 
-                        onClick={() => addToCart(product)}
-                    >
-                        Agregar al carrito
-                    </button>
-                </li>
-            ))}
-        </ul>
-    </div>
-);
+        <div className="max-w-6xl mx-auto p-6">
+            <h2 className="text-2xl font-bold mb-6 text-center">Productos</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {products.map(product => (
+                    <div key={product.id} className="bg-white p-6 rounded-lg shadow hover:shadow-lg">
+                        <h3 className="text-xl font-semibold mb-2">{product.name}</h3>
+                        <p className="text-gray-600 mb-4">${product.price.toFixed(2)}</p>
+                        <p className="text-sm text-gray-500 mb-4">
+                            Categoría: {product.categoryName}
+                        </p>
+
+                        <button
+                            onClick={() => addToCart(product)}
+                            className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
+                        >
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
 }
+
+export default ProductList;
