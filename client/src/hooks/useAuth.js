@@ -38,7 +38,7 @@ const useAuth = () => {
 
     // LOGOUT
     const logout = () => {
-        localStorage.removeItem('token');
+        localStorage.clear();  // ← LIMPIA TODO
         setUser(null);
     };
 

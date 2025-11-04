@@ -15,14 +15,14 @@ createRoot(document.getElementById('root')).render(
     <BrowserRouter>
       <CartProvider>
         <Routes>
-          <Route path='/' element={<App />}>
+          <Route path="/" element={<App />}>
             <Route index element={<ProductList />} />
-            <Route path='cart' element={<Cart />}/>           
-            <Route path='login' element={<Login />}/>           
-            <Route path='register' element={<Register />}/>           
+            <Route path="cart" element={<Cart />} />
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
           </Route>
         </Routes>
-    </CartProvider>
+      </CartProvider>
     </BrowserRouter>
   </StrictMode>
 );

@@ -10,6 +10,13 @@ export const CartProvider = ({ children }) => {
 
     // CARGAR CARRITO AL INICIAR
     useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            setCartItems([]);
+            setLoading(false);
+            return;
+        }
+
         const loadCart = async () => {
             try {
                 const data = await api.getCart();

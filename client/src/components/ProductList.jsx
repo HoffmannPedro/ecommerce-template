@@ -1,11 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useCart } from '../contexts/CartContext';
+import { useNavigate } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
 
 function ProductList() {
     const { addToCart } = useCart();
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    const { isAuthenticated } = useAuth();
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch('http://localhost:8080/api/products')
@@ -41,6 +46,15 @@ function ProductList() {
         );
     }
 
+    const handleAdd = (product) => {
+        if (!isAuthenticated()) {
+            alert('Iniciá sesión para agregar al carrito');
+            navigate('login');
+            return;
+        }
+        addToCart(product);
+    }
+
     return (
         <div className="max-w-6xl mx-auto p-6">
             <h2 className="text-2xl font-bold mb-6 text-center">Productos</h2>
@@ -54,10 +68,15 @@ function ProductList() {
                         </p>
 
                         <button
-                            onClick={() => addToCart(product)}
-                            className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
+                            onClick={() => handleAdd(product)}
+                            disabled={!isAuthenticated()}
+                            className={`w-full py-2 px-4 rounded ${
+                                isAuthenticated()
+                                    ? 'bg-blue-600 text-white hover:bg-blue-700'
+                                    : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                            }`}
                         >
-                            Agregar al Carrito
+                            {isAuthenticated() ? 'Agregar al Carrito' : 'Iniciar sesión'}
                         </button>
                     </div>
                 ))}

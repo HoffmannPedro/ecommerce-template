@@ -27,6 +27,7 @@ const api = {
     // Cart
     getCart: async () => {
         const token = getToken();
+        if (!token) return { items: [] };  // ← DEVUELVE VACÍO
         const response = await fetch(`${API_URL}/cart`, {
             headers: { 'Authorization' : `Bearer ${token}`}
         });
@@ -36,6 +37,7 @@ const api = {
 
     addItem: async (productId, quantity = 1) => {
         const token = getToken();
+        if (!token) throw new Error('Debes iniciar sesión');  // ← BLOQUEA
         const response = await fetch(`${API_URL}/cart/items`, {
             method: 'POST',
             headers: {
